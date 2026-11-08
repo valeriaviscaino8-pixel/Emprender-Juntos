@@ -1,0 +1,4 @@
+fastapi
+uvicorn
+sqlalchemy
+# (y cualquier otra dependencia que use tu proyecto)
