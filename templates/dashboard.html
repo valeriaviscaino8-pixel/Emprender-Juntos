@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Institucional - Dashboard</title>
+    <!-- CDN de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 min-h-screen">
+
+    <!-- Navbar Superior Institucional -->
+    <nav class="bg-blue-900 text-white shadow-md mb-8">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold">Gestión Institucional</h1>
+            
+            <div class="flex items-center space-x-4">
+                <!-- Botón que lleva a la página separada de registro -->
+                <a href="/registro" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-1.5 rounded-lg text-sm font-semibold transition duration-200 shadow-sm">
+                    + Registrar Nuevo Emprendedor
+                </a>
+
+                <span class="text-sm bg-blue-800 px-3 py-1.5 rounded-lg">
+                    Usuario: <strong class="text-blue-200">{{ user }}</strong>
+                </span>
+                <a href="/logout" class="bg-red-600 hover:bg-red-700 text-white px-4 py-1.5 rounded-lg text-sm font-semibold transition duration-200">
+                    Cerrar Sesión
+                </a>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Contenedor Principal del Dashboard (Listado y Tabla) -->
+    <main class="max-w-7xl mx-auto px-6 py-8">
+</div>
+</div>
+        <div class="bg-white rounded-xl shadow-lg p-6">
+            <h2 class="text-2xl font-bold text-slate-800 mb-6">Emprendedores Registrados</h2>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-100 border-b border-slate-200 text-slate-700 text-sm uppercase font-semibold">
+                            <th class="py-3 px-4">Cédula</th>
+                            <th class="py-3 px-4">Nombre Completo</th>
+                            <th class="py-3 px-4">Teléfono</th>
+                            <th class="py-3 px-4">Emprendimiento</th>
+                            <th class="py-3 px-4">Nacionalidad</th>
+                            <th class="py-3 px-4">Sector</th>
+                            <th class="py-3 px-4">Rubro</th>
+                            <th class="py-3 px-4">Comuna</th>
+                            <th class="py-3 px-4">Estado Certificado</th>
+                            <th class="py-3 px-4 text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 text-slate-600 text-sm">
+                        {% for e in emprendedores %}
+                        <tr class="hover:bg-slate-50 transition duration-150">
+                            <td class="py-3 px-4 font-medium text-slate-900">{{ e.cedula }}</td>
+                            <td class="py-3 px-4">{{ e.nombre_completo }}</td>
+                            <td class="py-3 px-4">{{ e.telefono }}</td>
+                            <td class="py-3 px-4">{{ e.emprendimiento }}</td>
+                            <td class="py-3 px-4">{{ e.nacionalidad }}</td>
+                            <td class="py-3 px-4">{{ e.sector }}</td>
+                            <td class="py-3 px-4">{{ e.rubro }}</td>
+                            <td class="py-3 px-4">{{ e.comuna }}</td>
+                            <td class="py-3 px-4 {{ e.clase_css }}">{{ e.estado_cert }}</td>
+                            <td class="py-3 px-4 text-center">
+                                <a href="/editar/{{ e.id }}" 
+                                   class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded text-xs font-semibold transition duration-150">
+                                    Modificar
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        
+    </main>
+
+</body>
+</html>

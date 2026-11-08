@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Emprendedor - Gestión Institucional</title>
+    <!-- CDN de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 min-h-screen">
+
+    <!-- Navbar Superior Institucional -->
+    <nav class="bg-blue-900 text-white shadow-md mb-8">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold">Gestión Institucional</h1>
+            
+            <div class="flex items-center space-x-4">
+                <a href="/dashboard" class="bg-slate-700 hover:bg-slate-600 text-white px-4 py-1.5 rounded-lg text-sm font-semibold transition duration-200">
+                    Volver al Listado de Emprendedores
+                </a>
+
+                <span class="text-sm bg-blue-800 px-3 py-1.5 rounded-lg">
+                    Usuario: <strong class="text-blue-200">{{ user }}</strong>
+                </span>
+                <a href="/logout" class="bg-red-600 hover:bg-red-700 text-white px-4 py-1.5 rounded-lg text-sm font-semibold transition duration-200">
+                    Cerrar Sesión
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenedor Principal del Formulario de Edición -->
+    <main class="max-w-3xl mx-auto px-6 py-8">
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-slate-800 mb-6">Modificar Datos de {{ emp.nombre }} {{ emp.apellido }}</h2>
+
+            <!-- Formulario que envía los cambios por POST a la ruta /editar/{id} -->
+            <form action="/editar/{{ emp.id }}" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                
+                <!-- Cédula -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Cédula</label>
+                    <input type="text" name="cedula" value="{{ emp.cedula }}" required 
+                           class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <!-- Nombre -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Nombre</label>
+                    <input type="text" name="nombre" value="{{ emp.nombre }}" required 
+                           class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <!-- Apellido -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Apellido</label>
+                    <input type="text" name="apellido" value="{{ emp.apellido }}" required 
+                           class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <!-- Teléfono -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Teléfono</label>
+                    <input type="text" name="telefono" value="{{ emp.telefono }}" required 
+                           class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <!-- Nombre del Emprendimiento -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Nombre del Emprendimiento</label>
+                    <input type="text" name="nombre_emprendimiento" value="{{ emp.nombre_emprendimiento }}" required 
+                           class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <!-- Nacionalidad -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Nacionalidad</label>
+                    <select name="nacionalidad" required 
+                            class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                        <option value="Venezolano" {% if emp.nacionalidad == 'Venezolano' %}selected{% endif %}>Venezolano</option>
+                        <option value="Extranjero" {% if emp.nacionalidad == 'Extranjero' %}selected{% endif %}>Extranjero</option>
+                    </select>
+                </div>
+
+                <!-- Sector -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Sector</label>
+                    <select name="sector" required 
+                            class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                        <option value="Fray Fernando Jimenez" {% if emp.sector == 'Fray Fernando Jimenez' %}selected{% endif %}>Fray Fernando Jimenez</option>
+                        <option value="La Capilla" {% if emp.sector == 'La Capilla' %}selected{% endif %}>La Capilla</option>
+                        <option value="Alto Apure" {% if emp.sector == 'Alto Apure' %}selected{% endif %}>Alto Apure</option>
+                        <option value="Casco Central" {% if emp.sector == 'Casco Central' %}selected{% endif %}>Casco Central</option>
+                        <option value="Viento Fresco" {% if emp.sector == 'Viento Fresco' %}selected{% endif %}>Viento Fresco</option>
+                        <option value="El Bolsillo" {% if emp.sector == 'El Bolsillo' %}selected{% endif %}>El Bolsillo</option>
+                        <option value="23 de Enero" {% if emp.sector == '23 de Enero' %}selected{% endif %}>23 de Enero</option>
+                        <option value="Candelaria" {% if emp.sector == 'Candelaria' %}selected{% endif %}>Candelaria</option>
+                        <option value="Valle Lindo" {% if emp.sector == 'Valle Lindo' %}selected{% endif %}>Valle Lindo</option>
+                    </select>
+                </div>
+
+                <!-- Comuna -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Comuna</label>
+                    <select name="comuna" required 
+                            class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                        <option value="">Seleccione una comuna...</option>
+                        <option value="Guerreros en Batalla" {% if emp.comuna == 'Guerreros en Batalla' %}selected{% endif %}>Guerreros en Batalla</option>
+                        <option value="Todos con Dios" {% if emp.comuna == 'Todos con Dios' %}selected{% endif %}>Todos con Dios</option>
+                        <option value="Forjadores de la Libertad" {% if emp.comuna == 'Forjadores de la Libertad' %}selected{% endif %}>Forjadores de la Libertad</option>
+                    </select>
+                </div>
+
+                <!-- Rubro -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Rubro/Actividad Económica</label>
+                    <select name="rubro" required 
+                            class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                        <option value="Tecnología" {% if emp.rubro == 'Tecnología' %}selected{% endif %}>Tecnología e Innovación</option>
+                        <option value="Comercio" {% if emp.rubro == 'Comercio' %}selected{% endif %}>Comercio y Ventas</option>
+                        <option value="Alimentos" {% if emp.rubro == 'Alimentos' %}selected{% endif %}>Alimentos y Gastronomía</option>
+                        <option value="Textil" {% if emp.rubro == 'Textil' %}selected{% endif %}>Textil y Confección</option>
+                        <option value="Servicios" {% if emp.rubro == 'Servicios' %}selected{% endif %}>Servicios Profesionales</option>
+                    </select>
+                </div>
+
+                <!-- Fecha de Emisión del Certificado -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Fecha de Emisión de Certificado</label>
+                    <input type="date" name="fecha_emision" value="{{ emp.fecha_emision }}" 
+                           class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <!-- Checkbox de Certificado -->
+                <div class="md:col-span-2 flex items-center space-x-2 mt-2">
+                    <input type="checkbox" name="tiene_certificado" value="true" id="tiene_certificado" 
+                           {% if emp.tiene_certificado %}checked{% endif %}
+                           class="w-4 h-4 text-blue-600 border-slate-300 rounded">
+                    <label for="tiene_certificado" class="text-sm font-medium text-slate-700">¿Posee certificado institucional?</label>
+                </div>
+
+                <!-- Botones de Acción -->
+                <div class="md:col-span-2 flex space-x-4 mt-4">
+                    <button type="submit" 
+                            class="flex-1 bg-amber-600 text-white py-2.5 rounded-lg font-semibold hover:bg-amber-700 transition duration-200">
+                        Guardar Cambios
+                    </button>
+                    <a href="/dashboard" 
+                       class="px-6 py-2.5 bg-slate-300 text-slate-700 rounded-lg font-semibold hover:bg-slate-400 transition duration-200 text-center">
+                        Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+</body>
+</html>
