@@ -1,4 +1,5 @@
 fastapi
 uvicorn
 sqlalchemy
+jinja2
 # (y cualquier otra dependencia que use tu proyecto)
